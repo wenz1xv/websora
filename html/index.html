@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSora - 视频生成平台</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1> Sora视频生成 </h1>
+        </header>
+
+
+        <!-- 视频生成面板 -->
+        <div id="video-panel" class="panel active">
+            <div id="videoParams">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="videoSize">视频方向:</label>
+                        <select id="videoSize" class="model-select"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="videoPrompt">提示词:</label>
+                <textarea id="videoPrompt" rows="3" placeholder="描述你想要生成的视频内容，例如：一只猫在弹钢琴"></textarea>
+            </div>
+
+            <div id="videoUploadSection" class="form-group">
+                <label for="videoRefImage">参考图片:</label>
+                <div class="upload-hint">
+                    <span class="hint-icon">⚠️</span>
+                    <span class="hint-text">不可包含任何真实人物形象人脸，否则将无法提交</span>
+                </div>
+                <div class="upload-container">
+                    <input type="file" id="videoRefImage" accept="image/*" style="display: none;">
+                    <button type="button" id="videoRefImageBtn" class="btn-upload">
+                        选择图片
+                    </button>
+                    <button type="button" id="clearVideoImageBtn" class="btn-clear hidden">
+                        清除图片
+                    </button>
+                </div>
+                <div id="videoImagePreview" class="image-preview"></div>
+            </div>
+
+            <button type="button" id="generateVideoBtn" class="btn-primary">=> 生成视频</button>
+        </div>
+
+
+        <!-- 任务列表 -->
+        <section class="tasks-section">
+            <div class="section-header">
+                <h2>📋 任务列表</h2>
+                <button type="button" id="refreshAllTasksBtn" class="btn-secondary">🔄 刷新全部</button>
+            </div>
+            <div id="tasksList" class="tasks-list">
+                <p class="empty-state">暂无任务</p>
+            </div>
+        </section>
+
+        <!-- 结果展示区 -->
+        <section class="results-section">
+            <h2>生成结果</h2>
+            <div id="resultsContainer">
+                <div class="video-orientation-section">
+                    <h4>横屏视频 (16:9)</h4>
+                    <div id="landscape-results" class="results-grid">
+                        <p class="empty-state">暂无横屏视频结果</p>
+                    </div>
+                </div>
+                <div class="video-orientation-section">
+                    <h4>竖屏视频 (9:16)</h4>
+                    <div id="portrait-results" class="results-grid portrait-grid">
+                        <p class="empty-state">暂无竖屏视频结果</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 自定义确认对话框 -->
+    <div id="customConfirmModal" class="confirm-modal">
+        <div class="confirm-modal-overlay"></div>
+        <div class="confirm-modal-content">
+            <div class="confirm-modal-header">
+                <div class="confirm-modal-icon">⚠️</div>
+                <h3 class="confirm-modal-title">确认删除</h3>
+            </div>
+            <div class="confirm-modal-body">
+                <p id="confirmModalMessage"></p>
+            </div>
+            <div class="confirm-modal-footer">
+                <button type="button" id="cancelConfirmBtn" class="btn-modal-cancel">取消</button>
+                <button type="button" id="confirmDeleteBtn" class="btn-modal-confirm">确定删除</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>正在处理中，请稍候...</p>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
