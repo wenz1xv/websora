@@ -9,6 +9,7 @@ const STORAGE_KEYS = {
 let tasks = [];
 let pollIntervals = {};
 let elements = {};
+let maxtasks = 3;
 
 
 // ====================
@@ -254,7 +255,6 @@ function showToast(message, type = 'info') {
 async function generateVideo() {
     const overlay = document.getElementById('loadingOverlay');
     overlay.classList.add('active');
-    maxtasks = 2;
 
     try {
         const activeTasks = tasks.filter(task =>
