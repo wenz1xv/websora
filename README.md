@@ -30,7 +30,7 @@ WebSora 是一个简洁、高效、易于部署的 Web 用户界面，专为与 
 1.  **前端 (HTML/CSS/JS)**：用户在浏览器中与之交互的静态界面。它负责收集用户输入（如提示词、图片），并将视频生成请求发送到后端的 `/webSora/v1/videos` 路径。
 2.  **Nginx (反向代理)**：作为唯一的服务端组件，Nginx 扮演着至关重要的角色：
     - **静态文件服务器**：托管 `html` 目录下的所有前端文件。
-    - **API 网关**：监听特定路径（例如 `/webSora/v1/videos`），并将所有收到的请求转发到真实的 Sora API 服务端（例如 `https://api.ephone.chat`）。
+    - **API 网关**：监听特定路径（例如 `/webSora/v1/videos`），并将所有收到的请求转发到真实的 Sora API 服务端（例如 `https://api.a.b`）。
     - **认证注入**：在转发请求时，Nginx 会根据配置自动在请求头中添加 `Authorization` 字段（API Key），从而避免了将密钥直接暴露在前端代码中的安全风险。
     - **负载均衡/轮询**：可以配置多个 API Key，Nginx 会根据前端传递的 `keyidx` 参数或随机选择一个 Key 来使用。
 
